@@ -4,12 +4,17 @@ output:
   html_document:
     keep_md: true
 ---
+```{r, echo=TRUE}
 
 ####Load packages that will be used
 
 library(dplyr)
 library(lubridate)
 library(knitr)
+```
+
+----------------------------------------------------------------------
+```{r, echo=TRUE}
 
 # Loading and preprocessing the data
 ####Load the CSV file using "read.csv"
@@ -19,7 +24,10 @@ fbdata<-read.csv("activity.csv")
 ####Arrange the date as year-month-day
 
 fbdata$date<-ymd(fbdata$date)
+```
 
+----------------------------------------------------------------------
+```{r, echo=TRUE}
 # What is mean total number of steps taken per day?
 ####Add the steps by day filtering na and create a histogram
 
@@ -40,6 +48,10 @@ labs(title="Steps per Day",x="Number of Steps",y="Frequency")
 
 stpmean <- mean(stp_day$steps)
 stpmedian<-median(stp_day$steps)
+```
+
+---------------------------------------------------------------------
+```{r, echo=TRUE}
 
 # What is the average daily activity pattern?
 ####Calculate the mean for each interval for all days and create a plot using geom_line with ggplot.
@@ -57,6 +69,10 @@ labs(title="Steps in Intervals", x="Intervals", y="Steps")
 ####Calculating interval with the most steps
 
 stpint[which.max(stpint$steps),]
+```
+
+---------------------------------------------------------------------
+```{r, echo=TRUE}
 
 # Imputing missing values
 ####Calculate and report all the missing values from the data set, fbdata.  Fill all the values with the mean for the given 5-minute interval.
@@ -89,6 +105,10 @@ labs(title="Steps per Day w/o NA",x="Number of Steps per Day",y="Frequency")
 
 stpmean_full<-mean(complete_data$steps, na.rm=TRUE)
 stpmedian_full<-median(complete_data$steps, na.rm=TRUE)
+```
+
+----------------------------------------------------------------------
+```{r, echo=TRUE}
 
 # Are there differences in activity patterns between weekdays and weekends?
 
@@ -105,3 +125,4 @@ geom_line() +
 facet_wrap(~weektype, ncol=1, nrow=2)
 
 print(plots)
+```
